@@ -3,6 +3,10 @@ package model
 import (
 	"database/sql"
 	"fmt"
+	"os"
+	"strings"
+	"time"
+
 	"github.com/songquanpeng/one-api/common"
 	"github.com/songquanpeng/one-api/common/config"
 	"github.com/songquanpeng/one-api/common/env"
@@ -13,9 +17,6 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"os"
-	"strings"
-	"time"
 )
 
 var DB *gorm.DB
@@ -94,6 +95,13 @@ func openPostgreSQL(dsn string) (*gorm.DB, error) {
 func openMySQL(dsn string) (*gorm.DB, error) {
 	logger.SysLog("using MySQL as database")
 	common.UsingMySQL = true
+	// Add time parsing parameters to DSN
+	if !strings.Contains(dsn, "?") {
+		dsn += "?"
+	} else {
+		dsn += "&"
+	}
+	dsn += "parseTime=true&loc=Local"
 	return gorm.Open(mysql.Open(dsn), &gorm.Config{
 		PrepareStmt: true, // precompile SQL
 	})
@@ -155,6 +163,12 @@ func migrateDB() error {
 		return err
 	}
 	if err = DB.AutoMigrate(&Log{}); err != nil {
+		return err
+	}
+	if err = DB.AutoMigrate(&PaymentRecord{}); err != nil {
+		return err
+	}
+	if err = DB.AutoMigrate(&TopUpCode{}); err != nil {
 		return err
 	}
 	if err = DB.AutoMigrate(&Channel{}); err != nil {

@@ -18,7 +18,32 @@ const AddUser = () => {
   };
 
   const submit = async () => {
-    if (inputs.username === '' || inputs.password === '') return;
+    // 前端验证
+    if (inputs.username === '') {
+      showError('用户名不能为空');
+      return;
+    }
+    if (inputs.password === '') {
+      showError('密码不能为空');
+      return;
+    }
+    if (inputs.username.length > 12) {
+      showError('用户名长度不能超过12个字符');
+      return;
+    }
+    if (inputs.password.length < 8) {
+      showError('密码长度不能少于8个字符');
+      return;
+    }
+    if (inputs.password.length > 20) {
+      showError('密码长度不能超过20个字符');
+      return;
+    }
+    if (inputs.display_name && inputs.display_name.length > 20) {
+      showError('显示名称长度不能超过20个字符');
+      return;
+    }
+
     const res = await API.post(`/api/user/`, inputs);
     const { success, message } = res.data;
     if (success) {

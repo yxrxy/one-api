@@ -91,7 +91,7 @@ const TopUp = () => {
             <Header as='h2'>{t('topup.title')}</Header>
           </Card.Header>
 
-          <Grid columns={2} stackable>
+          <Grid columns={3} stackable>
             <Grid.Column>
               <Card
                 fluid
@@ -236,6 +236,65 @@ const TopUp = () => {
                           {isSubmitting
                             ? t('topup.redeem_code.submitting')
                             : t('topup.redeem_code.submit')}
+                        </Button>
+                      </div>
+                    </div>
+                  </Card.Description>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+
+            <Grid.Column>
+              <Card
+                fluid
+                style={{
+                  height: '100%',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                }}
+              >
+                <Card.Content
+                  style={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <Card.Header>
+                    <Header as='h3' style={{ color: '#f2711c', margin: '1em' }}>
+                      <i className='credit card icon'></i>
+                      在线支付
+                    </Header>
+                  </Card.Header>
+                  <Card.Description
+                    style={{
+                      flex: 1,
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <div
+                      style={{
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <div style={{ textAlign: 'center', paddingTop: '1em' }}>
+                        <p style={{ color: '#666', fontSize: '14px' }}>
+                          支持支付宝、微信支付、PayPal
+                        </p>
+                      </div>
+                      <div
+                        style={{ textAlign: 'center', paddingBottom: '1em' }}
+                      >
+                        <Button
+                          color='orange'
+                          size='large'
+                          onClick={() => window.location.href = '/payment'}
+                          style={{ width: '80%' }}
+                        >
+                          立即支付
                         </Button>
                       </div>
                     </div>

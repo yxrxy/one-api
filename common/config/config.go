@@ -13,13 +13,13 @@ import (
 )
 
 var SystemName = "One API"
-var ServerAddress = "http://localhost:3000"
+var ServerAddress = ""
 var Footer = ""
 var Logo = ""
 var TopUpLink = ""
 var ChatLink = ""
-var QuotaPerUnit = 500 * 1000.0 // $0.002 / 1K tokens
-var DisplayInCurrencyEnabled = true
+var QuotaPerUnit = 1000.0 // 1元 = 1000额度
+var DisplayInCurrencyEnabled = false
 var DisplayTokenStatEnabled = true
 
 // Any options with "Secret", "Token" in its key won't be return by GetOptions
@@ -164,3 +164,23 @@ var UserContentRequestTimeout = env.Int("USER_CONTENT_REQUEST_TIMEOUT", 30)
 
 var EnforceIncludeUsage = env.Bool("ENFORCE_INCLUDE_USAGE", false)
 var TestPrompt = env.String("TEST_PROMPT", "Output only your specific model name with no additional text.")
+
+// 支付相关配置
+var EnableOnlinePayment = env.Bool("ENABLE_ONLINE_PAYMENT", true)
+var MinTopUpAmount = env.Int("MIN_TOPUP_AMOUNT", 1)
+var MaxTopUpAmount = env.Int("MAX_TOPUP_AMOUNT", 10000)
+
+// 支付宝配置
+var AlipayAppID = env.String("ALIPAY_APP_ID", "")
+var AlipayPrivateKey = env.String("ALIPAY_PRIVATE_KEY", "")
+var AlipayPublicKey = env.String("ALIPAY_PUBLIC_KEY", "")
+
+// 微信支付配置
+var WeChatAppID = env.String("WECHAT_APP_ID", "")
+var WeChatMchID = env.String("WECHAT_MCH_ID", "")
+var WeChatKey = env.String("WECHAT_KEY", "")
+
+// PayPal配置
+var PayPalClientID = env.String("PAYPAL_CLIENT_ID", "")
+var PayPalSecret = env.String("PAYPAL_SECRET", "")
+var PayPalMode = env.String("PAYPAL_MODE", "sandbox") // sandbox or live

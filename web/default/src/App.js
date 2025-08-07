@@ -22,6 +22,7 @@ import EditChannel from './pages/Channel/EditChannel';
 import Redemption from './pages/Redemption';
 import EditRedemption from './pages/Redemption/EditRedemption';
 import TopUp from './pages/TopUp';
+import Payment from './pages/Payment';
 import Log from './pages/Log';
 import Chat from './pages/Chat';
 import LarkOAuth from './components/LarkOAuth';
@@ -270,6 +271,16 @@ function App() {
           <PrivateRoute>
             <Suspense fallback={<Loading></Loading>}>
               <TopUp />
+            </Suspense>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path='/payment'
+        element={
+          <PrivateRoute>
+            <Suspense fallback={<Loading></Loading>}>
+              <Payment />
             </Suspense>
           </PrivateRoute>
         }
